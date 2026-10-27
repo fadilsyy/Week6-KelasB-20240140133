@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TokoKu Mini - Katalog Produk dan Form Pemesanan</title>
+  <meta name="description" content="Katalog produk dari DummyJSON dan form pemesanan.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/form.js" defer></script>
+  <script src="js/products.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#produk">Lewati ke konten</a>
+ 
+  <header id="site-header">
+    <div class="header-container">
+      <h1>TokoKu Mini</h1>
+      <p>Lihat katalog, lalu pesan produk favorit Anda.</p>
+      <nav aria-label="Navigasi utama">
+        <a href="#produk">Katalog</a>
+        <a href="#pemesanan">Pemesanan</a>
+      </nav>
+    </div>
+  </header>
+ 
+  <main>
+    <section id="produk" aria-labelledby="produk-title">
+      <h2 id="produk-title">Katalog Produk</h2>
+      <p id="product-count"></p>
+ 
+      <div id="product-status" aria-live="polite" aria-busy="false">
+        <div id="loading-indicator" role="status" hidden>
+          <span class="spinner" aria-hidden="true"></span>
+          <p>Memuat data produk...</p>
+        </div>
+        <div id="error-box" role="alert" hidden>
+          <p id="error-message"></p>
+          <button type="button" id="retry-button" class="btn btn-primary">Coba Lagi</button>
+        </div>
+        <div id="empty-box" hidden>
+          <p>Belum ada produk untuk ditampilkan.</p>
+        </div>
+      </div>
+ 
+      <div id="product-grid" class="product-grid"></div>
+    </section>
+ 
+    <section id="pemesanan" aria-labelledby="pemesanan-title">
+      <h2 id="pemesanan-title">Form Pemesanan Produk</h2>
+ 
+      <form id="order-form" novalidate>
+        <div class="form-group">
+          <label for="fullName">Nama Lengkap</label>
+          <input type="text" id="fullName" name="fullName" autocomplete="name" aria-describedby="fullName-error">
+          <span class="field-error" id="fullName-error" role="alert"></span>
+        </div>
+ 
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" aria-describedby="email-error">
+          <span class="field-error" id="email-error" role="alert"></span>
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">Nomor HP</label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" aria-describedby="phone-error">
+          <span class="field-error" id="phone-error" role="alert"></span>
+        </div>
+ 
+        <div class="form-group">
+          <label for="productSelect">Produk</label>
+          <select id="productSelect" name="product" aria-describedby="productSelect-error">
+            <option value="" selected disabled>-- Pilih produk --</option>
+          </select>
+          <span class="field-error" id="productSelect-error" role="alert"></span>
+        </div>
+ 
+        <div class="form-group">
+          <label for="quantity">Jumlah</label>
+          <input type="number" id="quantity" name="quantity" min="1" max="99" step="1" value="1" aria-describedby="quantity-error">
+          <small id="stockInfo"></small>
+          <span class="field-error" id="quantity-error" role="alert"></span>
+        </div>
+ 
+        <fieldset class="form-group">
+          <legend>Metode Pengiriman</legend>
+          <label><input type="radio" id="shippingRegular" name="shipping" value="regular" checked>
+                 Reguler (USD 5.00)</label>
+          <label><input type="radio" id="shippingExpress" name="shipping" value="express">
+                 Express (USD 15.00)</label>
+          <span class="field-error" id="shipping-error" role="alert"></span>
+        </fieldset>
+ 
+        <div class="form-group">
+          <label for="notes">Catatan (opsional)</label>
+          <textarea id="notes" name="notes" rows="3" maxlength="200" aria-describedby="notes-error"></textarea>
+          <small id="notesCounter">0/200</small>
+          <span class="field-error" id="notes-error" role="alert"></span>
+        </div>
+ 
+        <div class="form-group">
+          <label><input type="checkbox" id="agree" name="agree" aria-describedby="agree-error">
+                 Saya menyetujui syarat pemesanan.</label>
+          <span class="field-error" id="agree-error" role="alert"></span>
+        </div>
+ 
+        <div id="estimate-box" aria-live="polite">
+          <p>Subtotal: <span id="estimateSubtotal">-</span></p>
+          <p>Ongkir: <span id="estimateShipping">-</span></p>
+          <p><strong>Total: <span id="estimateTotal">-</span></strong></p>
+        </div>
+ 
+        <div id="form-feedback" aria-live="polite"></div>
+ 
+        <div class="form-actions">
+          <button type="submit" id="submit-button" class="btn btn-primary">Kirim Pesanan</button>
+          <button type="button" id="reset-button" class="btn">Reset</button>
+        </div>
+      </form>
+ 
+      <div id="order-result" hidden>
+        <h3 id="order-result-title" tabindex="-1">Pesanan Berhasil Dibuat</h3>
+        <div id="order-result-content"></div>
+        <button type="button" id="new-order-button" class="btn">Buat Pesanan Baru</button>
+      </div>
+    </section>
+  </main>
+ 
+  <footer>
+    <p>Tugas Praktikum PAW: JavaScript DOM, Event Handling, dan Fetch API. Data: DummyJSON.</p>
+  </footer>
+</body>
+</html>
